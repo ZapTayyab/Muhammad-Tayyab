@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, ArrowUpRight, Layers, X } from 'lucide-react';
 import { AnimatePresence, motion, useAnimationFrame, useReducedMotion } from 'motion/react';
 import { PROJECTS, ProjectItem } from '../data/portfolioData';
+import { trackEvent } from '../utils/analytics';
 
 type CategoryFilter = 'All' | ProjectItem['category'];
 
@@ -559,6 +560,14 @@ export function ProjectsSection() {
                             href={project.links[0].url}
                             target="_blank"
                             rel="noreferrer"
+                            onClick={() => {
+                              trackEvent('project_click', {
+                                project_id: project.id,
+                                project_name: project.title,
+                                link_type: project.links[0].type,
+                                link_url: project.links[0].url,
+                              });
+                            }}
                             className="inline-flex items-center gap-1 text-xs font-semibold text-[#E61919] hover:text-[#111113]"
                           >
                             <span>{project.links[0].label}</span>
@@ -660,6 +669,14 @@ export function ProjectsSection() {
                         href={link.url}
                         target="_blank"
                         rel="noreferrer"
+                        onClick={() => {
+                          trackEvent('project_click', {
+                            project_id: selectedProject.id,
+                            project_name: selectedProject.title,
+                            link_type: link.type,
+                            link_url: link.url,
+                          });
+                        }}
                         className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-white bg-[#111113] hover:bg-[#E61919] rounded-lg transition-colors whitespace-nowrap shrink-0"
                       >
                         <span>{link.label}</span>

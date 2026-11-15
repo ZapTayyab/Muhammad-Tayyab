@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { PROFILE } from '../data/portfolioData';
+import { trackEvent } from '../utils/analytics';
 import avatarPortrait from '../assets/images/tayyab_chatgpt_cutout.png';
 
 const EASE_EXPO: [number, number, number, number] = [0.16, 1, 0.3, 1];
@@ -44,6 +45,11 @@ export function ContactFooter() {
     try {
       await navigator.clipboard.writeText(value);
       setCopiedField(field);
+      trackEvent('social_click', {
+        channel: field,
+        action: 'copy',
+        value,
+      });
       setTimeout(() => setCopiedField(null), 2000);
     } catch {
       // Clipboard API unavailable in restricted contexts
@@ -53,6 +59,12 @@ export function ContactFooter() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!name.trim() || !email.trim() || !message.trim()) return;
+
+    trackEvent('contact_submit', {
+      method: 'mailto_intent',
+      has_name: true,
+      has_email: true,
+    });
 
     const subject = encodeURIComponent(`Portfolio Inquiry from ${name.trim()}`);
     const body = encodeURIComponent(
@@ -114,6 +126,13 @@ export function ContactFooter() {
                   href={PROFILE.github}
                   target="_blank"
                   rel="noreferrer"
+                  onClick={() => {
+                    trackEvent('social_click', {
+                      channel: 'github',
+                      action: 'visit',
+                      url: PROFILE.github,
+                    });
+                  }}
                   className="inline-flex items-center gap-2 hover:text-white transition-colors whitespace-nowrap"
                 >
                   <Github className="w-3.5 h-3.5 text-[#E61919] shrink-0" />
@@ -123,6 +142,13 @@ export function ContactFooter() {
                   href={PROFILE.linkedin}
                   target="_blank"
                   rel="noreferrer"
+                  onClick={() => {
+                    trackEvent('social_click', {
+                      channel: 'linkedin',
+                      action: 'visit',
+                      url: PROFILE.linkedin,
+                    });
+                  }}
                   className="inline-flex items-center gap-2 hover:text-white transition-colors whitespace-nowrap"
                 >
                   <Linkedin className="w-3.5 h-3.5 text-[#E61919] shrink-0" />
@@ -139,12 +165,26 @@ export function ContactFooter() {
               <div className="mt-2.5 space-y-1 text-xs sm:text-[13px] text-zinc-400">
                 <a
                   href={`tel:${PROFILE.phone.replace(/\s+/g, '')}`}
+                  onClick={() => {
+                    trackEvent('social_click', {
+                      channel: 'phone',
+                      action: 'call_intent',
+                      value: PROFILE.phone,
+                    });
+                  }}
                   className="block font-mono tabular-nums hover:text-white transition-colors"
                 >
                   {PROFILE.phone}
                 </a>
                 <a
                   href={`mailto:${PROFILE.email}`}
+                  onClick={() => {
+                    trackEvent('social_click', {
+                      channel: 'email',
+                      action: 'email_intent',
+                      value: PROFILE.email,
+                    });
+                  }}
                   className="block hover:text-white transition-colors"
                 >
                   {PROFILE.email}

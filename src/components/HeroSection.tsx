@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ArrowDownRight, FileText } from 'lucide-react';
 import { motion } from 'motion/react';
 import { HERO_DISCIPLINES, PROFILE } from '../data/portfolioData';
+import { trackEvent } from '../utils/analytics';
 import heroPortraitImg from '../assets/images/tayyab_chatgpt_cutout.png';
 import heroBackdropImg from '../assets/images/hero_studio_monochrome_1794727467655.jpg';
 
@@ -282,6 +283,16 @@ export function HeroSection({ revealed = false }: HeroSectionProps) {
                 href={PROFILE.resumePdf}
                 target="_blank"
                 rel="noreferrer"
+                onClick={() => {
+                  trackEvent('resume_view', {
+                    file_name: 'final_resume.pdf',
+                    source: 'hero_section',
+                  });
+                  trackEvent('resume_download', {
+                    file_name: 'final_resume.pdf',
+                    source: 'hero_section',
+                  });
+                }}
                 className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-[#111113] bg-white/90 border border-zinc-300 hover:border-[#111113] rounded-lg transition-colors duration-150 whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111113]"
               >
                 <FileText className="w-4 h-4" />
