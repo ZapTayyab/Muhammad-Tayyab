@@ -1,6 +1,6 @@
 <div align="center">
 
-<img width="1200" height="475" alt="GHBanner" src="[https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6](https://chatgpt.com/s/m_6af995fff2c8819197931dc40ab6dbc3)" />
+<img width="1200" height="475" alt="GHBanner" src="https://chatgpt.com/s/m_6af996a6096c8191a25a9ef94c4ec2de" />
 
   <h1>Built with AI Studio</h2>
 
