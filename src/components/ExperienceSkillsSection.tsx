@@ -208,8 +208,10 @@ function CapabilityBackdrop({
         src={image}
         alt={alt}
         referrerPolicy="no-referrer"
+        loading="lazy"
         decoding="async"
-        className={`w-full h-full object-cover object-center transition-[transform,opacity] duration-700 ease-out will-change-transform ${
+        draggable={false}
+        className={`w-full h-full object-cover object-center transition-[transform,opacity] duration-700 ease-out will-change-transform select-none ${
           isActive
             ? 'scale-100 opacity-100'
             : 'scale-105 opacity-75 group-hover:opacity-95'

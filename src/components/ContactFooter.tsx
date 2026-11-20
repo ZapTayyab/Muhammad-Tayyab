@@ -82,7 +82,7 @@ export function ContactFooter() {
       id="contact"
       className="relative bg-[#0B0B0D] text-[#F5F5F3] border-t border-zinc-800/80 scroll-mt-16 overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-6 sm:pb-8">
         {/* TOP 3-COLUMN FOOTER ARCHITECTURE */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10">
           {/* Left Column: Headline + Interactive "Get In Touch +" Trigger */}
@@ -236,6 +236,9 @@ export function ContactFooter() {
               <img
                 src={avatarPortrait}
                 alt="Muhammad Tayyab"
+                loading="lazy"
+                decoding="async"
+                draggable={false}
                 className="w-full h-full object-cover object-top"
               />
             </span>
@@ -252,7 +255,7 @@ export function ContactFooter() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.15 }}
         transition={{ duration: 0.6, ease: EASE_EXPO }}
-        className="relative w-full overflow-hidden bg-[#E61919] pt-4 sm:pt-6"
+        className="relative w-full overflow-hidden bg-[#E61919] pt-2.5 sm:pt-3.5 pb-2.5 sm:pb-4"
       >
         {/* Dramatic crimson-to-obsidian studio lighting wash matching the reference banner */}
         <div
@@ -267,13 +270,13 @@ export function ContactFooter() {
         {/* Edge-to-Edge Wordmark spanning 100% across both left and right sides */}
         <div aria-hidden="true" className="relative z-10 w-full select-none overflow-hidden">
           <svg
-            viewBox="0 0 1000 200"
+            viewBox="0 0 1000 206"
             preserveAspectRatio="xMidYMax meet"
             className="w-full h-auto block"
           >
             <text
               x="500"
-              y="204"
+              y="198"
               textAnchor="middle"
               textLength="1008"
               lengthAdjust="spacing"

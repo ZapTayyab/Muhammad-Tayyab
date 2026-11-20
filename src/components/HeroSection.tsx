@@ -111,8 +111,11 @@ export function HeroSection({ revealed = false }: HeroSectionProps) {
                 src={heroPortraitImg}
                 alt="Muhammad Tayyab — Software Engineer"
                 referrerPolicy="no-referrer"
+                fetchPriority="high"
+                decoding="sync"
+                draggable={false}
                 onError={() => setPortraitLoaded(false)}
-                className="relative z-10 h-full w-auto max-w-none object-contain object-bottom"
+                className="relative z-10 h-full w-auto max-w-none object-contain object-bottom select-none"
               />
             </motion.div>
           ) : (
@@ -141,6 +144,8 @@ export function HeroSection({ revealed = false }: HeroSectionProps) {
                 src={heroBackdropImg}
                 alt=""
                 referrerPolicy="no-referrer"
+                decoding="async"
+                draggable={false}
                 onError={() => setBackdropLoaded(false)}
                 className="w-full h-full object-cover object-center grayscale opacity-[0.2] contrast-110 mix-blend-multiply [mask-image:radial-gradient(ellipse_80%_78%_at_50%_46%,black_36%,transparent_95%)]"
               />

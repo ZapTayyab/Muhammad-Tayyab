@@ -55,13 +55,6 @@ export const PROFILE = {
     'Software Engineer building production web applications, cross-platform mobile apps, backend services, and AI evaluation workflows. Experienced in translating client requirements into responsive products, integrating cloud data and authentication, and verifying reliability with Cypress and Selenium.',
 };
 
-export const PROOF_METRICS = [
-  { value: '2+', label: 'Years Delivering', detail: 'Remote Web & Mobile Engineering' },
-  { value: '8', label: 'Shipped Systems', detail: 'Apps, AI Tools & Production Sites' },
-  { value: '2', label: 'Google Play Releases', detail: 'Funderaa & Fitfortis Live' },
-  { value: '1', label: 'ML Model Published', detail: 'Cross-Encoder on Hugging Face' },
-];
-
 export const HERO_DISCIPLINES: DisciplineItem[] = [
   {
     id: 'mobile',

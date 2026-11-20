@@ -317,12 +317,12 @@ function InteractiveBentoCard({
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.45, delay, ease: EASE_EXPO }}
       whileHover={{ y: -4 }}
-      className={`group relative rounded-[20px] p-6 sm:p-7 flex flex-col justify-between overflow-hidden transition-colors duration-200 ${
+      className={`group relative rounded-[20px] p-6 sm:p-7 flex flex-col justify-between overflow-hidden ${
         card.minHeightClass
       } ${card.colSpanClass ?? ''} ${
         isFlipped
-          ? 'bg-[#16161A] text-white ring-1 ring-[#E61919]/60 shadow-[0_18px_42px_-16px_rgba(230,25,25,0.3)]'
-          : 'bg-[#F5F5F3] text-[#111113] hover:bg-white'
+          ? 'bg-white text-[#111113] ring-1 ring-[#E61919]/55 shadow-[0_14px_34px_-16px_rgba(230,25,25,0.2)]'
+          : 'bg-[#F5F5F3] text-[#111113] hover:bg-white transition-colors duration-200'
       }`}
     >
       {/* Architectural Stepped Notches matching Bento Silhouette */}
@@ -431,10 +431,10 @@ function InteractiveBentoCard({
               <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#E61919] font-semibold">
                 {card.title}
               </p>
-              <h3 className="mt-1 font-display text-sm sm:text-base font-bold text-white leading-snug">
+              <h3 className="mt-1 font-display text-sm sm:text-base font-bold text-[#111113] leading-snug">
                 {card.detailHeadline}
               </h3>
-              <ul className="mt-2.5 space-y-1.5 text-xs text-zinc-300 leading-relaxed">
+              <ul className="mt-2.5 space-y-1.5 text-xs text-zinc-600 leading-relaxed">
                 {card.detailItems.map((line) => (
                   <li key={line} className="flex items-start gap-2">
                     <span
@@ -448,7 +448,7 @@ function InteractiveBentoCard({
               <div className="mt-4 flex items-center justify-between gap-2">
                 <a
                   href={card.jumpTarget}
-                  className="inline-flex items-center gap-1 text-xs font-semibold text-white hover:text-[#E61919] transition-colors"
+                  className="inline-flex items-center gap-1 text-xs font-semibold text-[#111113] hover:text-[#E61919] transition-colors"
                 >
                   <span>{card.jumpLabel}</span>
                   <ArrowDownRight className="w-3.5 h-3.5 text-[#E61919]" />
@@ -456,7 +456,7 @@ function InteractiveBentoCard({
                 <button
                   type="button"
                   onClick={onToggle}
-                  className="font-mono text-[10px] uppercase tracking-wider text-zinc-400 hover:text-white cursor-pointer"
+                  className="font-mono text-[10px] uppercase tracking-wider text-zinc-500 hover:text-[#111113] cursor-pointer"
                 >
                   Close
                 </button>

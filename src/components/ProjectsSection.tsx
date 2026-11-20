@@ -3,6 +3,14 @@ import { ArrowLeft, ArrowRight, ArrowUpRight, Layers, X } from 'lucide-react';
 import { AnimatePresence, motion, useAnimationFrame, useReducedMotion } from 'motion/react';
 import { PROJECTS, ProjectItem } from '../data/portfolioData';
 import { trackEvent } from '../utils/analytics';
+import onyxCodeImg from '../assets/images/projects/onyx_code.jpg';
+import funderaaImg from '../assets/images/projects/funderaa.jpg';
+import crossencoderImg from '../assets/images/projects/crossencoder.jpg';
+import fitfortisImg from '../assets/images/projects/fitfortis.jpg';
+import neonArenaImg from '../assets/images/projects/neon_arena_game.jpg';
+import aurumUaeImg from '../assets/images/projects/aurum-uae.jpg';
+import amazonCloneImg from '../assets/images/projects/amazon-clone.jpg';
+import mandelbulb3dImg from '../assets/images/projects/mandelbulb_3d.jpg';
 
 type CategoryFilter = 'All' | ProjectItem['category'];
 
@@ -42,154 +50,94 @@ function sampleSymmetricSpline(pts: number[], t: number, oddSymmetry: boolean): 
   );
 }
 
+const PROJECT_MEDIA: Record<
+  ProjectItem['visualTheme'],
+  { src: string; alt: string; objectPositionClass: string }
+> = {
+  onyx: {
+    src: onyxCodeImg,
+    alt: 'Onyx AI — LLM safety evaluation and automated Cypress regression testing code',
+    objectPositionClass: 'object-center',
+  },
+  funderaa: {
+    src: funderaaImg,
+    alt: 'Funderaa — Google Play cross-platform startup investment app screenshot',
+    objectPositionClass: 'object-top',
+  },
+  crossencoder: {
+    src: crossencoderImg,
+    alt: 'Cross-Encoder Reranking Model — glowing optical fiber semantic neural data streams',
+    objectPositionClass: 'object-center',
+  },
+  fitfortis: {
+    src: fitfortisImg,
+    alt: 'Fitfortis — Google Play fitness challenges application screenshot',
+    objectPositionClass: 'object-top',
+  },
+  neon: {
+    src: neonArenaImg,
+    alt: 'Neon Star Saler — 3D starfighter spaceship shooting crimson drones inside the glowing cyan arena',
+    objectPositionClass: 'object-center',
+  },
+  aurum: {
+    src: aurumUaeImg,
+    alt: 'Aurum — UAE Dubai skyline architecture representing international business platform',
+    objectPositionClass: 'object-center',
+  },
+  amazon: {
+    src: amazonCloneImg,
+    alt: 'Amazon Clone — online e-commerce storefront checkout workflow on laptop',
+    objectPositionClass: 'object-center',
+  },
+  portfolio: {
+    src: mandelbulb3dImg,
+    alt: 'Three.js & GSAP Interactive Portfolio — sculptural 3D mathematical fractal render',
+    objectPositionClass: 'object-center',
+  },
+};
+
 function ProjectVisual({
   theme,
   compact = false,
+  lazy = false,
 }: {
   theme: ProjectItem['visualTheme'];
   compact?: boolean;
+  lazy?: boolean;
 }) {
-  switch (theme) {
-    case 'onyx':
-      return (
-        <div className="relative w-full h-full bg-[#09090B] overflow-hidden flex flex-col justify-between p-3.5 sm:p-4">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_18%,rgba(230,25,25,0.45),transparent_58%)]" />
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_40%,rgba(9,9,11,0.92)_100%)]" />
-          <svg
-            viewBox="0 0 240 190"
-            className={`relative z-10 w-full ${compact ? 'h-full' : 'h-4/5 my-auto'}`}
-            aria-hidden="true"
-          >
-            <rect x="14" y="16" width="212" height="152" rx="12" fill="#131317" stroke="rgba(255,255,255,0.14)" />
-            <line x1="14" y1="46" x2="226" y2="46" stroke="rgba(255,255,255,0.08)" />
-            <rect x="28" y="28" width="44" height="6" rx="3" fill="#E61919" />
-            <rect x="82" y="28" width="32" height="6" rx="3" fill="rgba(255,255,255,0.22)" />
-            <rect x="28" y="62" width="184" height="44" rx="8" fill="#1A1A20" stroke="rgba(230,25,25,0.4)" />
-            <polyline
-              points="42,96 78,76 112,86 150,68 196,74"
-              fill="none"
-              stroke="#EF4444"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <rect x="28" y="118" width="86" height="36" rx="6" fill="#1E1E24" />
-            <rect x="124" y="118" width="88" height="36" rx="6" fill="#1E1E24" />
-            <rect x="40" y="130" width="48" height="5" rx="2" fill="rgba(255,255,255,0.6)" />
-            <rect x="136" y="130" width="54" height="5" rx="2" fill="#E61919" />
-          </svg>
-        </div>
-      );
-    case 'funderaa':
-      return (
-        <div className="relative w-full h-full bg-[#131316] overflow-hidden flex items-center justify-center p-3.5 sm:p-4">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_80%,rgba(230,25,25,0.38),transparent_62%)]" />
-          <svg viewBox="0 0 220 220" className="relative z-10 w-full h-full max-h-[210px]" aria-hidden="true">
-            <rect x="58" y="16" width="104" height="184" rx="18" fill="#1B1B20" stroke="rgba(255,255,255,0.24)" strokeWidth="1.5" />
-            <rect x="92" y="25" width="36" height="4" rx="2" fill="rgba(255,255,255,0.22)" />
-            <rect x="70" y="42" width="80" height="52" rx="9" fill="rgba(230,25,25,0.22)" stroke="#E61919" strokeWidth="1.3" />
-            <polyline points="79,80 99,63 116,71 139,50" fill="none" stroke="#FFFFFF" strokeWidth="2.3" strokeLinecap="round" />
-            <rect x="70" y="106" width="80" height="16" rx="4" fill="rgba(255,255,255,0.14)" />
-            <rect x="70" y="130" width="56" height="11" rx="3" fill="rgba(255,255,255,0.09)" />
-            <rect x="70" y="156" width="80" height="24" rx="7" fill="#E61919" />
-          </svg>
-        </div>
-      );
-    case 'crossencoder':
-      return (
-        <div className="relative w-full h-full bg-[#18181B] overflow-hidden flex items-center justify-center p-3.5 sm:p-4">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_25%,rgba(230,25,25,0.32),transparent_60%)]" />
-          <svg viewBox="0 0 220 200" className="relative z-10 w-full h-full max-h-[195px]" aria-hidden="true">
-            <rect x="18" y="34" width="76" height="30" rx="6" fill="#27272A" stroke="rgba(255,255,255,0.18)" />
-            <rect x="18" y="84" width="76" height="30" rx="6" fill="#27272A" stroke="rgba(255,255,255,0.18)" />
-            <rect x="18" y="134" width="76" height="30" rx="6" fill="#27272A" stroke="rgba(255,255,255,0.18)" />
-            <rect x="128" y="76" width="74" height="46" rx="10" fill="#E61919" />
-            <rect x="140" y="95" width="50" height="7" rx="3" fill="#FFFFFF" />
-            <path d="M94 49 C112 49, 112 99, 128 99" fill="none" stroke="#EF4444" strokeWidth="2.2" />
-            <path d="M94 99 L128 99" fill="none" stroke="#FFFFFF" strokeWidth="1.6" strokeDasharray="3 3" />
-            <path d="M94 149 C112 149, 112 99, 128 99" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="1.6" />
-          </svg>
-        </div>
-      );
-    case 'fitfortis':
-      return (
-        <div className="relative w-full h-full bg-[#0F1013] overflow-hidden flex items-center justify-center p-3.5 sm:p-4">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_78%,rgba(230,25,25,0.38),transparent_58%)]" />
-          <svg viewBox="0 0 220 200" className="relative z-10 w-full h-full max-h-[195px]" aria-hidden="true">
-            <rect x="16" y="28" width="188" height="142" rx="14" fill="#18181D" stroke="rgba(255,255,255,0.15)" />
-            <rect x="34" y="114" width="18" height="36" rx="4" fill="rgba(255,255,255,0.22)" />
-            <rect x="62" y="90" width="18" height="60" rx="4" fill="rgba(255,255,255,0.38)" />
-            <rect x="90" y="64" width="18" height="86" rx="4" fill="#E61919" />
-            <rect x="118" y="78" width="18" height="72" rx="4" fill="rgba(255,255,255,0.48)" />
-            <rect x="146" y="48" width="18" height="102" rx="4" fill="#EF4444" />
-            <rect x="174" y="72" width="14" height="78" rx="4" fill="rgba(255,255,255,0.26)" />
-          </svg>
-        </div>
-      );
-    case 'neon':
-      return (
-        <div className="relative w-full h-full bg-[#070709] overflow-hidden flex items-center justify-center p-3.5 sm:p-4">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_48%,rgba(230,25,25,0.48),transparent_65%)]" />
-          <svg viewBox="0 0 220 200" className="relative z-10 w-full h-full max-h-[195px]" aria-hidden="true">
-            <g stroke="rgba(255,255,255,0.14)" strokeWidth="1">
-              <line x1="12" y1="165" x2="208" y2="165" />
-              <line x1="36" y1="142" x2="184" y2="142" />
-              <line x1="110" y1="88" x2="12" y2="178" />
-              <line x1="110" y1="88" x2="208" y2="178" />
-            </g>
-            <polygon
-              points="110,24 166,68 144,128 76,128 54,68"
-              fill="rgba(230,25,25,0.22)"
-              stroke="#EF4444"
-              strokeWidth="2.2"
-            />
-            <polygon points="110,24 166,68 110,84" fill="rgba(255,255,255,0.16)" />
-          </svg>
-        </div>
-      );
-    case 'aurum':
-      return (
-        <div className="relative w-full h-full bg-[#141418] overflow-hidden flex items-center justify-center p-3.5 sm:p-4">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_15%,rgba(230,25,25,0.34),transparent_55%)]" />
-          <svg viewBox="0 0 220 200" className="relative z-10 w-full h-full max-h-[195px]" aria-hidden="true">
-            <rect x="16" y="24" width="188" height="152" rx="12" fill="#1C1C22" stroke="rgba(255,255,255,0.16)" />
-            <line x1="16" y1="50" x2="204" y2="50" stroke="rgba(255,255,255,0.1)" />
-            <rect x="30" y="34" width="44" height="6" rx="2" fill="#FFFFFF" />
-            <rect x="30" y="68" width="96" height="14" rx="3" fill="#F5F5F3" />
-            <rect x="30" y="92" width="76" height="7" rx="2" fill="rgba(255,255,255,0.45)" />
-            <rect x="30" y="114" width="58" height="22" rx="5" fill="#E61919" />
-            <rect x="136" y="68" width="54" height="86" rx="8" fill="#09090B" stroke="rgba(230,25,25,0.45)" />
-          </svg>
-        </div>
-      );
-    case 'amazon':
-      return (
-        <div className="relative w-full h-full bg-[#1C1C20] overflow-hidden flex items-center justify-center p-3.5 sm:p-4">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(230,25,25,0.28),transparent_55%)]" />
-          <svg viewBox="0 0 220 200" className="relative z-10 w-full h-full max-h-[195px]" aria-hidden="true">
-            <rect x="16" y="24" width="188" height="152" rx="12" fill="#FFFFFF" stroke="#E4E4E7" />
-            <rect x="16" y="24" width="188" height="28" rx="12" fill="#111113" />
-            <rect x="28" y="66" width="48" height="92" rx="6" fill="#F4F4F5" stroke="#E4E4E7" />
-            <rect x="86" y="66" width="48" height="92" rx="6" fill="#F4F4F5" stroke="#E4E4E7" />
-            <rect x="144" y="66" width="48" height="92" rx="6" fill="#F4F4F5" stroke="#E4E4E7" />
-            <rect x="35" y="136" width="34" height="11" rx="3" fill="#E61919" />
-            <rect x="93" y="136" width="34" height="11" rx="3" fill="#111113" />
-          </svg>
-        </div>
-      );
-    case 'portfolio':
-    default:
-      return (
-        <div className="relative w-full h-full bg-[#111113] overflow-hidden flex items-center justify-center p-3.5 sm:p-4">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(230,25,25,0.28),transparent_60%)]" />
-          <svg viewBox="0 0 220 200" className="relative z-10 w-full h-full max-h-[195px]" aria-hidden="true">
-            <circle cx="110" cy="100" r="64" fill="none" stroke="rgba(255,255,255,0.16)" strokeWidth="1.5" />
-            <circle cx="110" cy="100" r="42" fill="none" stroke="#E61919" strokeWidth="2.5" strokeDasharray="12 7" />
-            <circle cx="110" cy="100" r="14" fill="#FFFFFF" />
-          </svg>
-        </div>
-      );
-  }
+  const [imgFailed, setImgFailed] = useState(false);
+  const media = PROJECT_MEDIA[theme];
+
+  useEffect(() => {
+    setImgFailed(false);
+  }, [theme]);
+
+  return (
+    <div className="relative w-full h-full bg-[#111113] overflow-hidden select-none">
+      {!imgFailed ? (
+        <img
+          src={media.src}
+          alt={media.alt}
+          referrerPolicy="no-referrer"
+          loading={lazy ? 'lazy' : 'eager'}
+          decoding="async"
+          draggable={false}
+          onError={() => setImgFailed(true)}
+          className={`w-full h-full object-cover ${media.objectPositionClass} transition-transform duration-500 ease-out group-hover:scale-105 select-none`}
+        />
+      ) : (
+        <div className="w-full h-full bg-[radial-gradient(circle_at_50%_40%,rgba(230,25,25,0.35),#111113_78%)]" />
+      )}
+      <div
+        aria-hidden="true"
+        className={`pointer-events-none absolute inset-0 ${
+          compact
+            ? 'bg-gradient-to-t from-black/35 via-transparent to-black/10'
+            : 'bg-gradient-to-t from-black/55 via-black/10 to-black/15'
+        }`}
+      />
+    </div>
+  );
 }
 
 export function ProjectsSection() {
@@ -202,6 +150,7 @@ export function ProjectsSection() {
   const stageRef = useRef<HTMLDivElement | null>(null);
   const cardRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const stageWidthRef = useRef<number>(1280);
+  const inViewRef = useRef<boolean>(true);
   const phaseRef = useRef<number>(0);
   const impulseRef = useRef<number>(0);
   const velocityRef = useRef<number>(BASE_DRIFT_SPEED);
@@ -210,9 +159,28 @@ export function ProjectsSection() {
     active: boolean;
     startX: number;
     lastX: number;
+    lastTime: number;
+    flingVelocity: number;
     moved: boolean;
-  }>({ active: false, startX: 0, lastX: 0, moved: false });
+  }>({ active: false, startX: 0, lastX: 0, lastTime: 0, flingVelocity: 0, moved: false });
   const lastReportedIdxRef = useRef<number>(0);
+
+  const openProjectModal = (project: ProjectItem, source: 'carousel' | 'catalog') => {
+    setSelectedProject(project);
+    trackEvent('project_view', {
+      project_id: project.id,
+      project_title: project.title,
+      source,
+    });
+  };
+
+  const stepSelectedProject = (delta: number) => {
+    if (!selectedProject) return;
+    const currentIdx = PROJECTS.findIndex((p) => p.id === selectedProject.id);
+    if (currentIdx === -1) return;
+    const nextProject = PROJECTS[(currentIdx + delta + PROJECTS.length) % PROJECTS.length];
+    setSelectedProject(nextProject);
+  };
 
   const visibleGridProjects =
     filter === 'All' ? PROJECTS : PROJECTS.filter((p) => p.category === filter);
@@ -263,6 +231,9 @@ export function ProjectsSection() {
   };
 
   useEffect(() => {
+    const stageEl = stageRef.current;
+    if (!stageEl) return;
+
     const updateWidth = () => {
       if (stageRef.current) {
         stageWidthRef.current = stageRef.current.clientWidth;
@@ -270,22 +241,50 @@ export function ProjectsSection() {
       }
     };
     updateWidth();
-    const observer = new ResizeObserver(updateWidth);
-    if (stageRef.current) observer.observe(stageRef.current);
-    return () => observer.disconnect();
+    const resizeObserver = new ResizeObserver(updateWidth);
+    resizeObserver.observe(stageEl);
+
+    const visibilityObserver = new IntersectionObserver(
+      ([entry]) => {
+        inViewRef.current = entry.isIntersecting;
+      },
+      { rootMargin: '120px 0px' }
+    );
+    visibilityObserver.observe(stageEl);
+
+    return () => {
+      resizeObserver.disconnect();
+      visibilityObserver.disconnect();
+    };
   }, []);
 
   useEffect(() => {
     if (!selectedProject) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setSelectedProject(null);
+      if (e.key === 'Escape') {
+        setSelectedProject(null);
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        stepSelectedProject(1);
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        stepSelectedProject(-1);
+      }
     };
     window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
+      document.body.style.overflow = prevOverflow;
+    };
   }, [selectedProject]);
 
-  // Continuous 60fps curved 3D horizontal stream via direct GPU compositor transforms
+  // Continuous 60fps curved 3D horizontal stream via direct GPU compositor transforms (pauses off-screen)
   useAnimationFrame((_, deltaMs) => {
+    if (!inViewRef.current && Math.abs(impulseRef.current) < 0.001) return;
+
     const dt = Math.min(deltaMs, 48) / 1000;
     const n = PROJECTS.length;
 
@@ -297,7 +296,7 @@ export function ProjectsSection() {
         ? 0
         : BASE_DRIFT_SPEED;
 
-    velocityRef.current += (targetVelocity - velocityRef.current) * Math.min(1, dt * 6);
+    velocityRef.current += (targetVelocity - velocityRef.current) * Math.min(1, dt * 4.2);
     phaseRef.current += velocityRef.current * dt;
 
     if (Math.abs(impulseRef.current) > 0.001) {
@@ -377,19 +376,29 @@ export function ProjectsSection() {
               active: true,
               startX: e.clientX,
               lastX: e.clientX,
+              lastTime: performance.now(),
+              flingVelocity: 0,
               moved: false,
             };
           }}
           onPointerMove={(e) => {
             if (!dragRef.current.active) return;
+            const now = performance.now();
+            const dt = Math.max(8, now - dragRef.current.lastTime) / 1000;
             const dx = e.clientX - dragRef.current.lastX;
             if (Math.abs(e.clientX - dragRef.current.startX) > 6) {
               dragRef.current.moved = true;
             }
-            phaseRef.current -= dx / 135;
+            const dPhase = -dx / 135;
+            phaseRef.current += dPhase;
+            dragRef.current.flingVelocity = Math.max(-6, Math.min(6, dPhase / dt));
             dragRef.current.lastX = e.clientX;
+            dragRef.current.lastTime = now;
           }}
           onPointerUp={() => {
+            if (dragRef.current.active && dragRef.current.moved) {
+              velocityRef.current = dragRef.current.flingVelocity;
+            }
             dragRef.current.active = false;
             window.setTimeout(() => {
               dragRef.current.moved = false;
@@ -410,7 +419,7 @@ export function ProjectsSection() {
               type="button"
               onClick={() => {
                 if (dragRef.current.moved) return;
-                setSelectedProject(project);
+                openProjectModal(project, 'carousel');
               }}
               aria-label={`Inspect ${project.title}`}
               className="group absolute left-1/2 top-1/2 -ml-[66px] -mt-[106px] w-[132px] h-[212px] rounded-[20px] overflow-hidden border border-zinc-200/80 shadow-[0_18px_38px_-14px_rgba(17,17,19,0.3)] will-change-transform cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E61919]"
@@ -520,10 +529,10 @@ export function ProjectsSection() {
                   >
                     <button
                       type="button"
-                      onClick={() => setSelectedProject(project)}
+                      onClick={() => openProjectModal(project, 'catalog')}
                       className="w-full h-40 text-left cursor-pointer focus-visible:outline-none"
                     >
-                      <ProjectVisual theme={project.visualTheme} compact />
+                      <ProjectVisual theme={project.visualTheme} compact lazy />
                     </button>
 
                     <div className="p-5 flex-1 flex flex-col justify-between">
@@ -536,7 +545,7 @@ export function ProjectsSection() {
                         <h4 className="mt-1.5 font-display text-base font-bold tracking-tight text-[#111113] group-hover:text-[#E61919] transition-colors">
                           <button
                             type="button"
-                            onClick={() => setSelectedProject(project)}
+                            onClick={() => openProjectModal(project, 'catalog')}
                             className="text-left cursor-pointer"
                           >
                             {project.title}
@@ -550,7 +559,7 @@ export function ProjectsSection() {
                       <div className="mt-4 pt-3 border-t border-zinc-200/70 flex items-center justify-between gap-2">
                         <button
                           type="button"
-                          onClick={() => setSelectedProject(project)}
+                          onClick={() => openProjectModal(project, 'catalog')}
                           className="text-xs font-semibold text-zinc-700 hover:text-[#111113] underline-offset-4 hover:underline cursor-pointer"
                         >
                           Details
@@ -560,14 +569,6 @@ export function ProjectsSection() {
                             href={project.links[0].url}
                             target="_blank"
                             rel="noreferrer"
-                            onClick={() => {
-                              trackEvent('project_click', {
-                                project_id: project.id,
-                                project_name: project.title,
-                                link_type: project.links[0].type,
-                                link_url: project.links[0].url,
-                              });
-                            }}
                             className="inline-flex items-center gap-1 text-xs font-semibold text-[#E61919] hover:text-[#111113]"
                           >
                             <span>{project.links[0].label}</span>
@@ -608,6 +609,24 @@ export function ProjectsSection() {
             >
               <div className="h-48 sm:h-56 relative shrink-0">
                 <ProjectVisual theme={selectedProject.visualTheme} />
+                <div className="absolute top-4 left-4 flex items-center gap-1.5">
+                  <button
+                    type="button"
+                    onClick={() => stepSelectedProject(-1)}
+                    aria-label="Previous project"
+                    className="w-9 h-9 rounded-lg bg-[#111113]/85 text-white hover:bg-[#E61919] flex items-center justify-center transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                  >
+                    <ArrowLeft className="w-4 h-4" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => stepSelectedProject(1)}
+                    aria-label="Next project"
+                    className="w-9 h-9 rounded-lg bg-[#111113]/85 text-white hover:bg-[#E61919] flex items-center justify-center transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                  >
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
                 <button
                   type="button"
                   onClick={() => setSelectedProject(null)}
@@ -669,14 +688,6 @@ export function ProjectsSection() {
                         href={link.url}
                         target="_blank"
                         rel="noreferrer"
-                        onClick={() => {
-                          trackEvent('project_click', {
-                            project_id: selectedProject.id,
-                            project_name: selectedProject.title,
-                            link_type: link.type,
-                            link_url: link.url,
-                          });
-                        }}
                         className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-white bg-[#111113] hover:bg-[#E61919] rounded-lg transition-colors whitespace-nowrap shrink-0"
                       >
                         <span>{link.label}</span>
